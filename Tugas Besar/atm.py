@@ -1,147 +1,146 @@
 import os
 
-os.system('clear')
-def judul_1():
-    print('==============================')
-    print('Program ATM Bersama')
-    print('==============================')
-    print('\n')
-
-judul_1()
-username = int(input('Masukkan pin anda : '))
-
-
-
-def func():  # ------->>> BAGIAN BODY
-    os.system('clear')
-    pilihan = [
-        'Keluar',
-        'Penarikan',
-        'Transfer',
-        'Pembayaran',
-        'Ubah PIN',
-        'Lihat Saldo',
-    ]
-    while True:
-        
-        def pilihan1():
-            print('''           ----PILIH TRANSAKSI YANG ANDA INGINKAN---- 
-              ----PILIH CANCEL UNTUK MEMBATALKAN----''')
-
-            print('\n')
-            for i,o in enumerate(pilihan) :
-                print(i,'<---',o)
-                #print('\n')
-
-            print('\n')
-            print('91 >> lainnya')
-            print('\n')
-
-        pilihan1()
-        masukkan = int(input('pilih : '))
-        if masukkan == 91:
-            os.system('clear')
-            pilihan2 = [
-                'a',
-                'b',
-                'c',
-                'd',
-                'e',
-                'f',
-                'g',
-                'h',
-                'i',
-            ]
-            print('''           ----PILIH TRANSAKSI YANG ANDA INGINKAN---- 
-              ----PILIH CANCEL UNTUK MEMBATALKAN----''')
-
-            print('\n')
-            for i,o in enumerate(pilihan2) :
-                print(i,'<---',o)
-                #print('\n')
-
-            print('\n')
-            print('12 << kembali')
-            masukkan1 = int(input('pilih : '))
-            if masukkan1 == 12:
-                os.system('clear')
-                continue
-            
-        elif masukkan == 0:
-            os.system('clear')  
-            print('\n')   
-            print('Mengeluarkan kartu ....')
-            print('\n')
-            break
-        elif masukkan == 1 :
-            os.system('clear')
-            print('''         ---SILAHKAN PILIH JUMLAH UANG---
-             ATAU TRANSAKSI LAINNYA''')
-            
-            print('\n')
-            jumlah = [
-                '= 300.000',
-                '= 500.000',
-                '= 1.000.000',
-                '= 1.500.000',
-                '= 2.000.000',
-
-            ]
-            for i,o in enumerate(jumlah):
-                print(i,o)
-                print('\n')
-            print('23 Transaksi Lainnya >>')
-            print('\n')
-            penarikan = int(input('Pilih : '))
-            print('\n')
-            if penarikan == 23:
-                os.system('clear')
-                continue
-
-            elif penarikan == 0: #----------- RUMUS MTK
-                os.system('clear')
-                print('---PILIH DARI REKENING---')
-                print('1. Rekening Giro')
-                print('2. Rekening Tabungan')
-
-                rekening = int(input('Pilih : '))
-
-                pass
-                
-
-        elif masukkan == 2:
-            os.system('clear')
-            print('bagian tarik tunai') # isi tarik tunai
-            print('\n')
-            ils = input('Lanjut transaksi? (Y/N) : ')
-            if ils == 'Y'or'y': #udah bener
-                os.system('clear')
-                continue    
-            elif ils == 'n' or 'N':
-                exit
-
+os.system('cls' or 'clear')
+user_id = 0
+loop = "n"
+users = [
+    {
+        "id": "1234",
+        "no_rekening": "22210403333000",
+        "username": "aditwn",
+        "pin": "897612",
+        "saldo": 0
+    },
+    {
+        "id": "4321",
+        "no_rekening": "22210401110000",
+        "username": "irfan",
+        "pin": "762839",
+        "saldo": 67000000
+    }
+]
+status_login = False
+pakai_atm = "y"
+ 
+ 
+def cek_login(p):
+    for user in users:
+        if user['pin'] == p:
+            return user
+    return False
+ 
+ 
+def cek_user(id):
+    for i in range(len(users)):
+        if users[i]['id'] == str(id):
+            return int(i)
+    return -1
+ 
+ 
+def cek_rekening(no):
+    for i in range(len(users)):
+        if str(users[i]['no_rekening']) == str(no):
+            return int(i)
+    return -1
+ 
+ 
+def tranfer_uang(uang, no_rekening):
+    index1 = cek_user(user_id)
+    index2 = cek_rekening(no_rekening)
+    if index1 >= 0:
+        if users[index1]['saldo'] >= int(uang):
+            users[index1]['saldo'] = users[index1]['saldo'] - int(uang)
+            users[index2]['saldo'] = users[index2]['saldo'] + int(uang)
+            print("Anda berhasil mentransfer uang Rp." + str(uang) + " ke Rekening " + no_rekening)
+            print("sisa saldo anda adalah Rp.", users[index1]['saldo'])
         else:
-            pass
-
-if username == 1 : # ------->>> BAGIAN BODY
-    os.system('clear')
-    func()
-else:
-    for i in range(0,4):
-        os.system('clear')
-        judul_1()
-
-        i -= 3 
-        print(f'Sisa percobaan : {i}')
-        username = int(input('Masukkan pin anda : '))
-        if username == 1:
-            func()
-        elif i == -1:
-            os.system('clear')
-            print('\n\n')
+            print("Saldo anda tidak mencukupi")
+ 
+ 
+def ambil_uang(uang):
+    index1 = cek_user(user_id)
+    if index1 >= 0:
+        if users[index1]['saldo'] >= int(uang):
+            users[index1]['saldo'] = users[index1]['saldo'] - int(uang)
+            print("Anda berhasil menarik uang Rp." + str(uang))
+            print("sisa saldo anda adalah Rp.", users[index1]['saldo'])
+        else:
+            print("Saldo anda tidak mencukupi")
+ 
+ 
+while pakai_atm == "y":
+    while not status_login:
+        
+        print("SELAMAT DATANG DI ATM BANK Pesonainformatika")
+        print('\n')
+        print("Silahkan masukan pin anda")
+        pin = input("Masukan PIN : ")
+ 
+        cl = cek_login(pin)
+        if cl:
+            print("selamat datang " + cl['username'])
+            user_id = cl['id']
+            status_login = True
+            loop = "y"
+        else:
             
-            print('Kartu anda telah diblokir')
-            print('Silahkan menghubungi cabang bank terdekat ')
-            print('\n')
-            break
-     
+            print("")
+            print("Ops PIN anda salah")
+            print("")
+            print("")
+ 
+    while loop == "y" and status_login:
+        os.system('cls' or 'clear')
+        u = users[cek_user(user_id)]
+        print("SELAMAT DATANG DI ATM Pesonainformatika")
+        print('\n')
+        print("1. Cek Saldo")
+        print("2. Transfer Uang")
+        print("3. Ambil Uang")
+        print("4. Logout")
+        print("5. Keluar ATM")
+        print('\n')
+        a = int(input("Silahkan pilih menu : "))
+        if a == 1:
+            print("")
+            print("Sisa Saldo anda adalah Rp.", u['saldo'])
+            print("")
+            print("")
+            loop = "n"
+        elif a == 2:
+            print("Untuk Mentransfer Uang Silahkan Masukan No Rekening Tujuan")   
+            no_rek = input("Masukan No Rekening Tujuan : ")
+            cnk = cek_rekening(no_rek)
+ 
+            if cnk == 1 or 2:
+                os.system('cls')
+                print("Masukkan nominal yang yang akan di transfer")
+                
+                nominal = input("Nominal Yang Akan Di Transfer : ")
+                tranfer_uang(nominal, no_rek)
+                print("")
+                loop = "n"
+            else:
+                print("")
+                print("Nomor Rekening Tujuan Tidak ditemukan atau tidak terdaftar")
+                print("")
+                loop = "n"
+ 
+        elif a == 3:
+            nominal = input("Nominal Yang Akan Di Tarik : ")
+            ambil_uang(nominal)
+            print("")
+            loop = "n"
+        elif a == 4:
+            status_login = False
+ 
+        elif a == 5:
+            status_login = False
+            loop = "n"
+            pakai_atm = "n"
+        else:
+            print("pilihan tidak tersedia")
+        if status_login == True:
+            input("kembali Ke menu (Enter) ")
+            print("")
+            loop = "y"
