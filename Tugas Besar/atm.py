@@ -6,17 +6,24 @@ loop = "n"
 users = [
     {
         "id": "1234",
-        "no_rekening": "22210403333000",
+        "no_rekening": "222104012",
         "username": "aditwn",
-        "pin": "897612",
-        "saldo": 0
+        "pin": "222222",
+        "saldo": 42000000
     },
     {
         "id": "4321",
-        "no_rekening": "22210401110000",
-        "username": "irfan",
-        "pin": "762839",
+        "no_rekening": "222104011",
+        "username": "Irfan",
+        "pin": "111111",
         "saldo": 67000000
+    },
+    {
+        "id": "5678",
+        "no_rekening": "222104004",
+        "username": "Handaru",
+        "pin": "444444",
+        "saldo": 80000000
     }
 ]
 status_login = False
@@ -70,7 +77,7 @@ def ambil_uang(uang):
  
 while pakai_atm == "y":
     while not status_login:
-        
+        #os.system('cls' or 'clear')
         print("SELAMAT DATANG DI ATM BANK Pesonainformatika")
         print('\n')
         print("Silahkan masukan pin anda")
@@ -78,6 +85,7 @@ while pakai_atm == "y":
  
         cl = cek_login(pin)
         if cl:
+            os.system('cls' or 'clear')
             print("selamat datang " + cl['username'])
             user_id = cl['id']
             status_login = True
@@ -85,12 +93,17 @@ while pakai_atm == "y":
         else:
             
             print("")
-            print("Ops PIN anda salah")
+            print("PIN yang anda masukkan salah")
             print("")
             print("")
+            
  
     while loop == "y" and status_login:
         os.system('cls' or 'clear')
+        print("SELAMAT DATANG " + cl['username'])
+        user_id = cl['id']
+        status_login = True
+        loop = "y"
         u = users[cek_user(user_id)]
         print("SELAMAT DATANG DI ATM Pesonainformatika")
         print('\n')
@@ -108,15 +121,17 @@ while pakai_atm == "y":
             print("")
             loop = "n"
         elif a == 2:
-            print("Untuk Mentransfer Uang Silahkan Masukan No Rekening Tujuan")   
-            no_rek = input("Masukan No Rekening Tujuan : ")
+            os.system('cls' or 'clear')
+            print("Untuk Mentransfer Uang Silahkan Masukan No Rekening Tujuan")  
+            print("") 
+            print("") 
+            print("") 
+            no_rek = input("Masukan No Rekening Tujuan    : ")
+            
             cnk = cek_rekening(no_rek)
  
             if cnk == 1 or 2:
-                os.system('cls')
-                print("Masukkan nominal yang yang akan di transfer")
-                
-                nominal = input("Nominal Yang Akan Di Transfer : ")
+                nominal = input("Nominal Yang Akan Di Transfer : Rp.  ")
                 tranfer_uang(nominal, no_rek)
                 print("")
                 loop = "n"
@@ -127,11 +142,13 @@ while pakai_atm == "y":
                 loop = "n"
  
         elif a == 3:
+            os.system('cls' or 'clear')
             nominal = input("Nominal Yang Akan Di Tarik : ")
             ambil_uang(nominal)
             print("")
             loop = "n"
         elif a == 4:
+            os.system('cls' or 'clear')
             status_login = False
  
         elif a == 5:
