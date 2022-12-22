@@ -77,6 +77,7 @@ def ambil_uang(uang):
  
 while pakai_atm == "y":
     while not status_login:
+        os.system('cls' or 'clear')
         print("            ===============================================")
         print("             SELAMAT DATANG DI ATM BANK Pesonainformatika")
         print("            ===============================================")
@@ -95,9 +96,10 @@ while pakai_atm == "y":
         else:
             os.system('cls' or 'clear')
             print("")
-            print("PIN yang anda masukkan salah")
+            print("PIN yang anda masukkan salah!!")
             print("")
-
+            print("")
+            reload = input("(Enter)")
  
     while loop == "y" and status_login:
         os.system('cls' or 'clear')
@@ -119,7 +121,7 @@ while pakai_atm == "y":
         print('\n')
         a = int(input("Silahkan pilih jenis transaksi : "))
         if a == 1:
-            print("")
+            os.system('cls' or 'clear')
             print("Sisa Saldo anda adalah Rp.", u['saldo'])
             print("")
             print("")
@@ -132,50 +134,57 @@ while pakai_atm == "y":
             print("") 
             print("") 
             print("") 
-            no_rek = input("Masukan No Rekening Tujuan    : ")
             
-            cnk = cek_rekening(no_rek)
- 
-            if cnk == 1 or 2:
+            no_rek = int(input("Masukan No Rekening Tujuan    : "))
+            
+            if no_rek == 222104004:
                 nominal = int(input("Nominal Yang Akan Di Transfer : Rp. "))
+                nama = cek_user(users)
+                saldo = u['saldo']
+                sisa_saldo = saldo - nominal
+                os.system('cls' or 'clear')
+                print('TRANSAKSI BERHASIL!!')
                 print("")
-                print("")
-                yorn = input('Apakah anda ingin melajutkan? (Y/N) : ')
-                if yorn == ('y' or 'Y'):
-                    os.system('cls' or 'clear')
-                    nama = cek_user(id)
-                    saldo = u['saldo']
-                    sisa_saldo = saldo - nominal
-                    print('     INFORMASI TRANSAKSI')
-                    print('')
-                    print(f"No Rekening : {no_rek}")
-                    print(f"Nama        : {str(nama)}")
-                    print(f'JUMLAH      : Rp. {nominal}')
-                    print(f'Sisa Saldo  : Rp.',sisa_saldo)
-                    
-                    menu = input('Lanjut transaksi lainnya? (Y/N) : ')
-                    if menu == ('y' or 'Y'):
-                        break
-                    else:
-                        print('terimakasih')
-                        status_login = False
-                        loop = 'n'
-                        pakai_atm = 'n'
-                    #if no_rek == 222104011:
-                        #print('Irfan Dwi Kurniadi')
-                        #tranfer_uang(nominal, no_rek)
-                        #print("")
-                        #loop = "n"
-                else:
-                    print("")
-                    print('kembali ke menu utama')
-                    break
+                print('     INFORMASI TRANSAKSI')
+                print('')
+                print(f"No Rekening : {no_rek}")
+                print(f"Nama        : HANDARU DHARMA PUTRA")
+                print(f'JUMLAH      : Rp. {nominal}')
+                print(f'Sisa Saldo  : Rp.',sisa_saldo)
                 
+            elif no_rek == 222104012:
+                nominal = int(input("Nominal Yang Akan Di Transfer : Rp. "))
+                nama = cek_user(users)
+                saldo = u['saldo']
+                sisa_saldo = saldo - nominal
+                os.system('cls' or 'clear')
+                print('TRANSAKSI BERHASIL!!')
+                print("")
+                print('     INFORMASI TRANSAKSI')
+                print('')
+                print(f"No Rekening : {no_rek}")
+                print(f"Nama        : ADITYA WAHYU NINGRAT")
+                print(f'JUMLAH      : Rp. {nominal}')
+                print(f'Sisa Saldo  : Rp.',sisa_saldo)
+            elif no_rek == 222104011:
+                nominal = int(input("Nominal Yang Akan Di Transfer : Rp. "))
+                nama = cek_user(users)
+                saldo = u['saldo']
+                sisa_saldo = saldo - nominal
+                os.system('cls' or 'clear')
+                print('TRANSAKSI BERHASIL!!')
+                print("")
+                print('     INFORMASI TRANSAKSI')
+                print('')
+                print(f"No Rekening : {no_rek}")
+                print(f"Nama        : IRFAN DWI KURNIADI")
+                print(f'JUMLAH      : Rp. {nominal}')
+                print(f'Sisa Saldo  : Rp.',sisa_saldo)
             else:
                 print("")
                 print("Nomor Rekening Tujuan Tidak ditemukan atau tidak terdaftar")
                 print("")
-                loop = "n"
+                loop = "Y"
  
         elif a == 3:
             os.system('cls' or 'clear')
